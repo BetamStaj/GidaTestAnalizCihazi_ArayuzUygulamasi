@@ -1,0 +1,10 @@
+C:\Users\ribat\source\repos\deneme\deneme\bin\Debug\deneme.exe.config
+C:\Users\ribat\source\repos\deneme\deneme\bin\Debug\deneme.exe
+C:\Users\ribat\source\repos\deneme\deneme\bin\Debug\deneme.pdb
+C:\Users\ribat\source\repos\deneme\deneme\obj\Debug\deneme.csprojAssemblyReference.cache
+C:\Users\ribat\source\repos\deneme\deneme\obj\Debug\deneme.Form1.resources
+C:\Users\ribat\source\repos\deneme\deneme\obj\Debug\deneme.Properties.Resources.resources
+C:\Users\ribat\source\repos\deneme\deneme\obj\Debug\deneme.csproj.GenerateResource.cache
+C:\Users\ribat\source\repos\deneme\deneme\obj\Debug\deneme.csproj.CoreCompileInputs.cache
+C:\Users\ribat\source\repos\deneme\deneme\obj\Debug\deneme.exe
+C:\Users\ribat\source\repos\deneme\deneme\obj\Debug\deneme.pdb
