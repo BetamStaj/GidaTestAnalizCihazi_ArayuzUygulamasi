@@ -41,12 +41,14 @@
             this.analyzeBtn = new System.Windows.Forms.Button();
             this.plotexportBtn = new System.Windows.Forms.Button();
             this.newmsrmntBtn = new System.Windows.Forms.Button();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.minimizeBtn = new System.Windows.Forms.Button();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -195,6 +197,15 @@
             this.newmsrmntBtn.Text = "New Measurement";
             this.newmsrmntBtn.UseVisualStyleBackColor = false;
             // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::deneme.Properties.Resources.altKısım1;
+            this.pictureBox5.Location = new System.Drawing.Point(-2, 563);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(1026, 73);
+            this.pictureBox5.TabIndex = 28;
+            this.pictureBox5.TabStop = false;
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::deneme.Properties.Resources.cizgi3;
@@ -228,7 +239,7 @@
             this.minimizeBtn.FlatAppearance.BorderSize = 0;
             this.minimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minimizeBtn.Image = global::deneme.Properties.Resources.minimize;
-            this.minimizeBtn.Location = new System.Drawing.Point(902, 7);
+            this.minimizeBtn.Location = new System.Drawing.Point(927, 7);
             this.minimizeBtn.Name = "minimizeBtn";
             this.minimizeBtn.Size = new System.Drawing.Size(32, 32);
             this.minimizeBtn.TabIndex = 11;
@@ -242,7 +253,7 @@
             this.CloseBtn.FlatAppearance.BorderSize = 0;
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBtn.Image = global::deneme.Properties.Resources.close;
-            this.CloseBtn.Location = new System.Drawing.Point(952, 7);
+            this.CloseBtn.Location = new System.Drawing.Point(977, 7);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(32, 32);
             this.CloseBtn.TabIndex = 10;
@@ -257,7 +268,7 @@
             this.pictureBox1.Image = global::deneme.Properties.Resources.cizgi1;
             this.pictureBox1.Location = new System.Drawing.Point(-28, 45);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(3154, 2);
+            this.pictureBox1.Size = new System.Drawing.Size(3179, 2);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -268,7 +279,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            this.ClientSize = new System.Drawing.Size(995, 556);
+            this.ClientSize = new System.Drawing.Size(1020, 629);
+            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
@@ -292,6 +304,7 @@
             this.Text = " ";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -321,6 +334,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }
 

@@ -121,14 +121,17 @@
   <data name="cizgi1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cizgi1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="cizgi3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cizgi3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="yeniClose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\yeniClose.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Group_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Group_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Group_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Group_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="foto3yeni" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\foto3yeni.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,6 +151,9 @@
   <data name="close" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="altKısım" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\altKısım.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="CloseSon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CloseSon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,13 +169,13 @@
   <data name="Group_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Group_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Group_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Group_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="foto2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\foto2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cizgi3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cizgi3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="altKısım1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\altKısım1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

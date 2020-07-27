@@ -134,5 +134,11 @@
   <ItemGroup>
     <None Include="Resources\cizgi3.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\altKısım.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\altKısım1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
