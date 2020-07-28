@@ -8,3 +8,13 @@ C:\Users\ribat\OneDrive\Masaüstü\GidaTestAnalizCihazi_ArayuzUygulamasi-master\
 C:\Users\ribat\OneDrive\Masaüstü\GidaTestAnalizCihazi_ArayuzUygulamasi-master\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.csproj.CoreCompileInputs.cache
 C:\Users\ribat\OneDrive\Masaüstü\GidaTestAnalizCihazi_ArayuzUygulamasi-master\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.exe
 C:\Users\ribat\OneDrive\Masaüstü\GidaTestAnalizCihazi_ArayuzUygulamasi-master\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.pdb
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\bin\Debug\GidaAnalizi.exe.config
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\bin\Debug\GidaAnalizi.exe
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\bin\Debug\GidaAnalizi.pdb
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.csprojAssemblyReference.cache
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.Form1.resources
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.Properties.Resources.resources
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.csproj.GenerateResource.cache
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.csproj.CoreCompileInputs.cache
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.exe
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.pdb
