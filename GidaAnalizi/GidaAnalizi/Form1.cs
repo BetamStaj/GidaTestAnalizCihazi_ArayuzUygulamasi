@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.IO.Ports;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -88,6 +89,9 @@ namespace GidaAnalizi
                     //portu açıyorum
                     ComPort.Open();
 
+                    //diğer butonlarımı aktif hale getiriyorum
+                    getRefBtn.Enabled = false;
+                    dataSaveBtn.Enabled = true;
 
                 }//hatalarimi kontrol ediyorum
                 catch (UnauthorizedAccessException) { hataVarMi = true; }
@@ -151,6 +155,10 @@ namespace GidaAnalizi
                 //eğer null değilse portu kapatiyorum
                 ComPort.Close();
                 connectBtn.Enabled = true;
+
+                //butonlarımı pasif hale getiriyorum
+                getRefBtn.Enabled = false;
+                dataSaveBtn.Enabled = false;
             }
 
         }
@@ -171,7 +179,36 @@ namespace GidaAnalizi
             }
         }
 
+        string KaydedilecekDataninPathi;
+        string kaydedilecekDosyaninAdi;
+        //Save data butonuna tıklandığında çalışacak olan fonksiyon
+        private void dataSaveBtn_Click(object sender, EventArgs e)
+        {
+            //Save Data butonuna tıklandığında kaydedilecek olan verinin yeri ve adı belirlenmeli
+            //burda bir file manager açılıp dosayanın nereye kaydedileceği ve adının ne olacağı belirleniliyor
 
-
+            OpenFileDialog folderBrowser = new OpenFileDialog();
+            
+            //gösterilecek olan dosyaları gösteriyorum
+            folderBrowser.ValidateNames = false;
+            folderBrowser.CheckFileExists = false;
+            folderBrowser.CheckPathExists = true;
+            
+            
+            //dosyayı açıyorum eğer bir path seçilirse if bloğunun içine girecek
+            if (folderBrowser.ShowDialog() == DialogResult.OK)
+            {
+                //kaydedilecek olan dosyanin adini ve nereye kaydedileceği bilgilerini alıyorum
+                kaydedilecekDosyaninAdi = folderBrowser.FileName + ".txt";
+                KaydedilecekDataninPathi = Path.GetDirectoryName(folderBrowser.FileName);
+                getRefBtn.Enabled = true;
+            }
+            else
+            {
+                getRefBtn.Enabled = false;
+                kaydedilecekDosyaninAdi = "";
+                KaydedilecekDataninPathi = "";
+            }
+        }
     }
 }
