@@ -121,13 +121,12 @@ namespace GidaAnalizi
         {
             var serialPort = (SerialPort)sender;
 
-            if (serialPort.IsOpen) { 
-            
-            var data = serialPort.ReadExisting();
-            
+            if (serialPort.IsOpen) {
+            var data = serialPort.ReadLine();
 
-            Console.WriteLine(data);
+
             //şimdilik test amaçlı ekrana bastırıyorum
+            Console.WriteLine(data);
             textBox1.Text = data;
 
             }
@@ -209,6 +208,18 @@ namespace GidaAnalizi
                 kaydedilecekDosyaninAdi = "";
                 KaydedilecekDataninPathi = "";
             }
+        }
+        
+
+        //Get Reference butonuna tıklandığında çalışan fonksiyon
+        private void getRefBtn_Click(object sender, EventArgs e)
+        {
+            //Bu fonksiyonun amacı cihaza S komutunu göndermek. cihaz ise S kodunu aldığında cevap olarak
+            // 18 satır 1 sutündan oluşan bir veri kümesi gönderecek.
+            //bu datayı port_DataReceived fonksiyonunda alıcam
+
+            //cihaza komutu gönderiyorum
+            ComPort.Write("S");
         }
     }
 }
