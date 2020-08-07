@@ -28,7 +28,7 @@ namespace GidaAnalizi
             portlariGuncelle();
 
         }
-        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int WM_NCLBUTTONDOWN = 0xA1; //title bar olmayan uygulamayı fare ile sürüklemek için gereken kod. 31-44 satır araligi
         public const int HTCAPTION = 0x2;
         [DllImport("User32.dll")]
         public static extern bool ReleaseCapture();
@@ -41,7 +41,6 @@ namespace GidaAnalizi
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
