@@ -41,23 +41,6 @@ namespace GidaAnalizi
             grafik.Series["D1"].Color = Color.Red;
 
 
-            /*bu kısım test için var bu kısımlar silinecek
-             -------------------------------------------*/
-
-            var data = "1\n2\n3\n4\n5\n";
-
-            Console.WriteLine(data);
-
-            var formatliData = data.Split('\n');
-            var orginData = "";
-            for (var i = 0; i < formatliData.Length; i++)
-            {
-                orginData += formatliData[i];
-                Console.WriteLine(Int32.Parse(orginData) + 88888);
-
-            }
-            Console.WriteLine(orginData);
-            /*--------------------------------------------*/
 
         }
         public const int WM_NCLBUTTONDOWN = 0xA1;
@@ -133,7 +116,7 @@ namespace GidaAnalizi
                 //kullaniciyi hataya karşı bilgilendiriyorum
                 if (hataVarMi)
                 {
-                    MessageBox.Show("bağlandığınız portu kontrol ediniz..", "Porta bağlanmakta sorun yaşandı", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    uyariVer("Porta bağlanmakta sorun yaşandı", "bağlandığınız portu kontrol ediniz..");
                 }
 
 
@@ -148,6 +131,12 @@ namespace GidaAnalizi
 
         }
 
+        public void uyariVer(string baslik, string aciklama)
+        {
+            MessageBox.Show(aciklama, baslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+
         //Get Reference butonuna tıklandığında çalışan fonksiyon
         private void getRefBtn_Click(object sender, EventArgs e)
         {
@@ -158,6 +147,34 @@ namespace GidaAnalizi
             Console.WriteLine();
             //cihaza komutu gönderiyorum
             ComPort.Write("S");
+        }
+
+        //foodType bilgisini tutan değişken
+        string foodType = "";
+        //analyze butonuna tıklandığında çalışacak olan yer
+        private void analyzeBtn_Click_1(object sender, EventArgs e)
+        {
+            //eğer food type bilgisi seçilmemişse kullanıcıya bilgi veriyorum ve işlem yapmıyorum
+            if(foodTypeComboBox.Text == "" && foodTypeInput.Text == "")
+            {
+                uyariVer("food type girilmedi","lütfen food type ını giriniz!");
+            }
+            else //food type ı input olarak mı yoksa comboboxtan mı seçtiğini bulmaya çalışıyorum
+            {
+                //eğer input olarak girmediyse food type ı  comboboxtan alıyorum
+                if(foodTypeInput.Text == "")
+                {
+                    foodType = foodTypeComboBox.Text;
+                }
+                else//eğer input olarak girdiyse food type ı inputtan alıyorum ayrıca comboboxa ekliyorum
+                {
+                    foodType = foodTypeInput.Text;
+                    foodTypeComboBox.Items.Add(foodType);
+                }
+                //cihaza 'S' komutunu gönderiyorum
+                ComPort.Write("S");
+            }           
+
         }
 
         //cihazdan bir data geldiğinde burası çalışıyor
@@ -171,31 +188,49 @@ namespace GidaAnalizi
                 //cihazdan gelen datayi aliyorum
                 var data = serialPort.ReadLine();
 
+
+                //datayi cizdirmek icin bir diziye atiyorum
+                var cizilecekData = data.Split('\n');
+
+                //grafigi cizdirmek icin fonksiyona gonderiyorum
+                grafigeCiz(cizilecekData);
+
+
+
+                String dosyayaKaydedilecekData = "";
+
                 //eğer get referance butonuna tıklanırak 'S' komutu gönderildiyse buraya girecek
                 if (refreshBtn.Enabled == true)
                 {
 
-                    //datayi cizdirmek icin bir diziye atiyorum
-                    var cizilecekData = data.Split('\n');
+                    //get referance butonuna tıklandığı için datayı dosyaya kaydetmeden önce başlık olarak referans verisi yazıyorum
+                    dosyayaKaydedilecekData = "- - - referans verisi - - - \n" ;
+                    dosyayaKaydedilecekData += data;
 
-                    //grafigi cizdirmek icin fonksiyona gonderiyorum
-                    grafigeCiz(cizilecekData);
-
-                    //dataya başlık ekliyorum
-                    data = " referans verisi: \n" + data;
-
-                    //datayi kaydediyorum
-                    dosyayaKaydet(data);
-
-                    //get referance butonunu pasif yapıyorum
+                    //get referance butonunu pasif yapıyorum analyze butonunu aktif hale getiriyorum
                     refreshBtn.Enabled = false;
                     analyzeBtn.Enabled = true;
 
                 }//eğer analyze butonuna tıklanılarak 'S' komutu gönderilirse burası çalışacak
                 else if (analyzeBtn.Enabled == true)
                 {
+                    //analyze butonuna tıklandığı için datayı dosyaya kaydetmeden önce food type ını başlık olarak ekliyorum
+                    dosyayaKaydedilecekData = "- - - "+ foodType +" - - -\n";
+                    
+                    //veriler tek satır 18 sütun şeklinde kaydediliyor o yüzden datayı formatlıyorum
+                    string formatliData = "";
+                    for(int i = 0; i < cizilecekData.Length; i++)
+                    {
+                        formatliData = formatliData + cizilecekData[i];
+                    }
+                    //formatli datayı dosyaya keydedilecek dataya ekliyorum
+                    dosyayaKaydedilecekData += formatliData; 
 
                 }
+
+
+                //datayi kaydediyorum
+                dosyayaKaydet(dosyayaKaydedilecekData);
 
 
 
@@ -315,9 +350,6 @@ namespace GidaAnalizi
             }
         }
 
-        private void analyzeBtn_Click(object sender, EventArgs e)
-        {
-
-        }
+    
     }
 }

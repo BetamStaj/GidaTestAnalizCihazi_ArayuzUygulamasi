@@ -40,8 +40,8 @@
             this.connectBtn = new System.Windows.Forms.Button();
             this.dataSaveBtn = new System.Windows.Forms.Button();
             this.getRefBtn = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.foodTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.foodTypeInput = new System.Windows.Forms.TextBox();
             this.analyzeBtn = new System.Windows.Forms.Button();
             this.plotexportBtn = new System.Windows.Forms.Button();
             this.newmsrmntBtn = new System.Windows.Forms.Button();
@@ -170,23 +170,23 @@
             this.getRefBtn.UseVisualStyleBackColor = false;
             this.getRefBtn.Click += new System.EventHandler(this.getRefBtn_Click);
             // 
-            // comboBox2
+            // foodTypeComboBox
             // 
-            this.comboBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(24, 354);
-            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(160, 24);
-            this.comboBox2.TabIndex = 20;
+            this.foodTypeComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
+            this.foodTypeComboBox.FormattingEnabled = true;
+            this.foodTypeComboBox.Location = new System.Drawing.Point(24, 354);
+            this.foodTypeComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.foodTypeComboBox.Name = "foodTypeComboBox";
+            this.foodTypeComboBox.Size = new System.Drawing.Size(160, 24);
+            this.foodTypeComboBox.TabIndex = 20;
             // 
-            // textBox1
+            // foodTypeInput
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 399);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(160, 22);
-            this.textBox1.TabIndex = 21;
+            this.foodTypeInput.Location = new System.Drawing.Point(24, 399);
+            this.foodTypeInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.foodTypeInput.Name = "foodTypeInput";
+            this.foodTypeInput.Size = new System.Drawing.Size(160, 22);
+            this.foodTypeInput.TabIndex = 21;
             // 
             // analyzeBtn
             // 
@@ -201,6 +201,7 @@
             this.analyzeBtn.TabIndex = 22;
             this.analyzeBtn.Text = "Analyze";
             this.analyzeBtn.UseVisualStyleBackColor = false;
+            this.analyzeBtn.Click += new System.EventHandler(this.analyzeBtn_Click_1);
             // 
             // plotexportBtn
             // 
@@ -363,8 +364,8 @@
             this.Controls.Add(this.newmsrmntBtn);
             this.Controls.Add(this.plotexportBtn);
             this.Controls.Add(this.analyzeBtn);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.foodTypeInput);
+            this.Controls.Add(this.foodTypeComboBox);
             this.Controls.Add(this.getRefBtn);
             this.Controls.Add(this.dataSaveBtn);
             this.Controls.Add(this.connectBtn);
@@ -404,8 +405,8 @@
         private System.Windows.Forms.Button connectBtn;
         private System.Windows.Forms.Button dataSaveBtn;
         private System.Windows.Forms.Button getRefBtn;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox foodTypeComboBox;
+        private System.Windows.Forms.TextBox foodTypeInput;
         private System.Windows.Forms.Button analyzeBtn;
         private System.Windows.Forms.Button plotexportBtn;
         private System.Windows.Forms.Button newmsrmntBtn;
