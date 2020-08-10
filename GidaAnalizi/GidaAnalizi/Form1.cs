@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace GidaAnalizi
 {
@@ -27,8 +29,38 @@ namespace GidaAnalizi
 
             portlariGuncelle();
 
+
+            //grafigin ayarlarini yapiyorum
+            grafik.Titles.Add("Food Analyze");
+            var chart = grafik.ChartAreas[0];
+            chart.AxisX.Minimum = 1;
+            chart.AxisX.Maximum = 18; // x ekseninin sınırları belirlendi.
+            chart.AxisY.Minimum = 0;
+            chart.AxisY.Maximum = 100; // y ekseninin sınırları belirlendi.
+            chart.AxisY.Interval = 10; // y ekseninin araligi belirlendi.
+            grafik.Series["D1"].Color = Color.Red;
+
+
+            /*bu kısım test için var bu kısımlar silinecek
+             -------------------------------------------*/
+
+            var data = "1\n2\n3\n4\n5\n";
+
+            Console.WriteLine(data);
+
+            var formatliData = data.Split('\n');
+            var orginData = "";
+            for (var i = 0; i < formatliData.Length; i++)
+            {
+                orginData += formatliData[i];
+                Console.WriteLine(Int32.Parse(orginData) + 88888);
+
+            }
+            Console.WriteLine(orginData);
+            /*--------------------------------------------*/
+
         }
-        public const int WM_NCLBUTTONDOWN = 0xA1; //title bar olmayan uygulamayı fare ile sürüklemek için gereken kod. 31-44 satır araligi
+        public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HTCAPTION = 0x2;
         [DllImport("User32.dll")]
         public static extern bool ReleaseCapture();
@@ -41,6 +73,7 @@ namespace GidaAnalizi
                 ReleaseCapture();
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -115,20 +148,76 @@ namespace GidaAnalizi
 
         }
 
+        //Get Reference butonuna tıklandığında çalışan fonksiyon
+        private void getRefBtn_Click(object sender, EventArgs e)
+        {
+            //Bu fonksiyonun amacı cihaza S komutunu göndermek. cihaz ise S kodunu aldığında cevap olarak
+            // 18 satır 1 sutündan oluşan bir veri kümesi gönderecek.
+            //bu datayı port_DataReceived fonksiyonunda alıcam
+
+            Console.WriteLine();
+            //cihaza komutu gönderiyorum
+            ComPort.Write("S");
+        }
+
         //cihazdan bir data geldiğinde burası çalışıyor
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var serialPort = (SerialPort)sender;
 
-            if (serialPort.IsOpen) {
-            var data = serialPort.ReadLine();
+            if (serialPort.IsOpen)
+            {
+
+                //cihazdan gelen datayi aliyorum
+                var data = serialPort.ReadLine();
+
+                //eğer get referance butonuna tıklanırak 'S' komutu gönderildiyse buraya girecek
+                if (refreshBtn.Enabled == true)
+                {
+
+                    //datayi cizdirmek icin bir diziye atiyorum
+                    var cizilecekData = data.Split('\n');
+
+                    //grafigi cizdirmek icin fonksiyona gonderiyorum
+                    grafigeCiz(cizilecekData);
+
+                    //dataya başlık ekliyorum
+                    data = " referans verisi: \n" + data;
+
+                    //datayi kaydediyorum
+                    dosyayaKaydet(data);
+
+                    //get referance butonunu pasif yapıyorum
+                    refreshBtn.Enabled = false;
+                    analyzeBtn.Enabled = true;
+
+                }//eğer analyze butonuna tıklanılarak 'S' komutu gönderilirse burası çalışacak
+                else if (analyzeBtn.Enabled == true)
+                {
+
+                }
 
 
-            //şimdilik test amaçlı ekrana bastırıyorum
-            Console.WriteLine(data);
-            textBox1.Text = data;
+
 
             }
+        }
+
+
+        public void grafigeCiz(String[] cizilecekData)
+        {
+            foreach (var series in grafik.Series)
+            {
+                series.Points.Clear();
+            }
+
+            for (int i = 1; i <= 18; i++)
+            {
+                grafik.Series["D1"].Points.AddXY(i, Int32.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                                                                                    // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
+            }
+
+
         }
 
 
@@ -177,8 +266,8 @@ namespace GidaAnalizi
             }
         }
 
-        string KaydedilecekDataninPathi;
-        string kaydedilecekDosyaninAdi;
+
+        string kaydedilecekDosyaPathi = "";
         //Save data butonuna tıklandığında çalışacak olan fonksiyon
         private void dataSaveBtn_Click(object sender, EventArgs e)
         {
@@ -186,39 +275,49 @@ namespace GidaAnalizi
             //burda bir file manager açılıp dosayanın nereye kaydedileceği ve adının ne olacağı belirleniliyor
 
             OpenFileDialog folderBrowser = new OpenFileDialog();
-            
+
             //gösterilecek olan dosyaları gösteriyorum
             folderBrowser.ValidateNames = false;
             folderBrowser.CheckFileExists = false;
             folderBrowser.CheckPathExists = true;
-            
-            
+
+
+
             //dosyayı açıyorum eğer bir path seçilirse if bloğunun içine girecek
             if (folderBrowser.ShowDialog() == DialogResult.OK)
             {
+
+
                 //kaydedilecek olan dosyanin adini ve nereye kaydedileceği bilgilerini alıyorum
-                kaydedilecekDosyaninAdi = folderBrowser.FileName + ".txt";
-                KaydedilecekDataninPathi = Path.GetDirectoryName(folderBrowser.FileName);
+                kaydedilecekDosyaPathi = folderBrowser.FileName + ".txt";
                 getRefBtn.Enabled = true;
+
+
             }
             else
             {
                 getRefBtn.Enabled = false;
-                kaydedilecekDosyaninAdi = "";
-                KaydedilecekDataninPathi = "";
+                kaydedilecekDosyaPathi = "";
+
+            }
+
+
+
+
+        }
+
+        public void dosyayaKaydet(string kaydedilecekVeri)
+        {
+
+            using (StreamWriter sw = File.AppendText(kaydedilecekDosyaPathi))
+            {
+                sw.WriteLine(kaydedilecekVeri);
             }
         }
-        
 
-        //Get Reference butonuna tıklandığında çalışan fonksiyon
-        private void getRefBtn_Click(object sender, EventArgs e)
+        private void analyzeBtn_Click(object sender, EventArgs e)
         {
-            //Bu fonksiyonun amacı cihaza S komutunu göndermek. cihaz ise S kodunu aldığında cevap olarak
-            // 18 satır 1 sutündan oluşan bir veri kümesi gönderecek.
-            //bu datayı port_DataReceived fonksiyonunda alıcam
 
-            //cihaza komutu gönderiyorum
-            ComPort.Write("S");
         }
     }
 }
