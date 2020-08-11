@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -248,10 +248,10 @@
             // pictureBox5
             // 
             this.pictureBox5.Image = global::GidaAnalizi.Properties.Resources.altKısım1;
-            this.pictureBox5.Location = new System.Drawing.Point(0, 670);
+            this.pictureBox5.Location = new System.Drawing.Point(-1, 686);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(1696, 107);
+            this.pictureBox5.Size = new System.Drawing.Size(1363, 90);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox5.TabIndex = 28;
             this.pictureBox5.TabStop = false;
@@ -292,7 +292,7 @@
             this.minimizeBtn.FlatAppearance.BorderSize = 0;
             this.minimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minimizeBtn.Image = global::GidaAnalizi.Properties.Resources.yeniMinimize;
-            this.minimizeBtn.Location = new System.Drawing.Point(1276, 9);
+            this.minimizeBtn.Location = new System.Drawing.Point(1247, 9);
             this.minimizeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.minimizeBtn.Name = "minimizeBtn";
             this.minimizeBtn.Size = new System.Drawing.Size(43, 39);
@@ -307,7 +307,7 @@
             this.CloseBtn.FlatAppearance.BorderSize = 0;
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBtn.Image = global::GidaAnalizi.Properties.Resources.yeniClose1;
-            this.CloseBtn.Location = new System.Drawing.Point(1332, 9);
+            this.CloseBtn.Location = new System.Drawing.Point(1303, 9);
             this.CloseBtn.Margin = new System.Windows.Forms.Padding(4);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(43, 39);
@@ -324,7 +324,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(-37, 55);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(4268, 2);
+            this.pictureBox1.Size = new System.Drawing.Size(4239, 2);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
@@ -333,18 +333,18 @@
             // grafik
             // 
             this.grafik.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            chartArea1.Name = "ChartArea1";
-            this.grafik.ChartAreas.Add(chartArea1);
-            legend1.Name = "D1";
-            this.grafik.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.grafik.ChartAreas.Add(chartArea3);
+            legend3.Name = "D1";
+            this.grafik.Legends.Add(legend3);
             this.grafik.Location = new System.Drawing.Point(451, 89);
             this.grafik.Margin = new System.Windows.Forms.Padding(4);
             this.grafik.Name = "grafik";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "D1";
-            series1.Name = "D1";
-            this.grafik.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series3.Legend = "D1";
+            series3.Name = "D1";
+            this.grafik.Series.Add(series3);
             this.grafik.Size = new System.Drawing.Size(896, 552);
             this.grafik.TabIndex = 31;
             this.grafik.Text = "chart1";
@@ -354,7 +354,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            this.ClientSize = new System.Drawing.Size(1389, 774);
+            this.ClientSize = new System.Drawing.Size(1360, 774);
             this.Controls.Add(this.grafik);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.pictureBox5);
