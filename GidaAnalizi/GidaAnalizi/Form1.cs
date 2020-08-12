@@ -22,11 +22,10 @@ namespace GidaAnalizi
             //threadlar içerisindeyken birbiriliyle iletişim kursunlar diye bunu false yapıyorum (bu kodu internetten buldum)
             CheckForIllegalCrossThreadCalls = false;
 
+            //başlangıçta  Butonları pasif hale getiriyorum
+            butonlariPasifYap();
 
-            //başlangıçta  Save Data ve Get Reference Butonlarını pasif hale getiriyorum
-            getRefBtn.Enabled = false;
-            dataSaveBtn.Enabled = false;
-
+            //portlari tariyorum
             portlariGuncelle();
 
 
@@ -57,6 +56,16 @@ namespace GidaAnalizi
                 SendMessage(Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
 
+        }
+
+        //başlangıçta  Butonları pasif hale getiriyorum
+        private void butonlariPasifYap()
+        {
+            getRefBtn.Enabled = false;
+            dataSaveBtn.Enabled = false;
+            analyzeBtn.Enabled = false;
+            plotexportBtn.Enabled = false;
+            disconnectBtn.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -107,6 +116,7 @@ namespace GidaAnalizi
                     //diğer butonlarımı aktif hale getiriyorum
                     getRefBtn.Enabled = false;
                     dataSaveBtn.Enabled = true;
+                    disconnectBtn.Enabled = true;
 
                 }//hatalarimi kontrol ediyorum
                 catch (UnauthorizedAccessException) { hataVarMi = true; }
@@ -144,7 +154,6 @@ namespace GidaAnalizi
             // 18 satır 1 sutündan oluşan bir veri kümesi gönderecek.
             //bu datayı port_DataReceived fonksiyonunda alıcam
 
-            Console.WriteLine();
             //cihaza komutu gönderiyorum
             ComPort.Write("S");
         }
@@ -169,7 +178,12 @@ namespace GidaAnalizi
                 else//eğer input olarak girdiyse food type ı inputtan alıyorum ayrıca comboboxa ekliyorum
                 {
                     foodType = foodTypeInput.Text;
-                    foodTypeComboBox.Items.Add(foodType);
+
+                    if (!foodTypeComboBox.Items.Contains(foodType))
+                    {
+                        foodTypeComboBox.Items.Add(foodType);
+                    }
+
                 }
                 //cihaza 'S' komutunu gönderiyorum
                 ComPort.Write("S");
@@ -181,12 +195,17 @@ namespace GidaAnalizi
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             var serialPort = (SerialPort)sender;
-
+           
             if (serialPort.IsOpen)
             {
 
-                //cihazdan gelen datayi aliyorum
-                var data = serialPort.ReadLine();
+               var data = "";
+               //cihazdan gelen datayi aliyorum
+               for (int i = 0; i < 17; i++)
+               {
+                    data += serialPort.ReadLine() + "\n";
+               }
+               data += serialPort.ReadLine();
 
 
                 //datayi cizdirmek icin bir diziye atiyorum
@@ -200,7 +219,7 @@ namespace GidaAnalizi
                 String dosyayaKaydedilecekData = "";
 
                 //eğer get referance butonuna tıklanırak 'S' komutu gönderildiyse buraya girecek
-                if (refreshBtn.Enabled == true)
+                if (getRefBtn.Enabled == true)
                 {
 
                     //get referance butonuna tıklandığı için datayı dosyaya kaydetmeden önce başlık olarak referans verisi yazıyorum
@@ -208,7 +227,7 @@ namespace GidaAnalizi
                     dosyayaKaydedilecekData += data;
 
                     //get referance butonunu pasif yapıyorum analyze butonunu aktif hale getiriyorum
-                    refreshBtn.Enabled = false;
+                    getRefBtn.Enabled = false;
                     analyzeBtn.Enabled = true;
 
                 }//eğer analyze butonuna tıklanılarak 'S' komutu gönderilirse burası çalışacak
@@ -221,7 +240,7 @@ namespace GidaAnalizi
                     string formatliData = "";
                     for(int i = 0; i < cizilecekData.Length; i++)
                     {
-                        formatliData = formatliData + cizilecekData[i];
+                        formatliData = formatliData + cizilecekData[i] +" ";
                     }
                     //formatli datayı dosyaya keydedilecek dataya ekliyorum
                     dosyayaKaydedilecekData += formatliData; 
@@ -241,14 +260,16 @@ namespace GidaAnalizi
 
         public void grafigeCiz(String[] cizilecekData)
         {
+            Console.WriteLine("datam: uzunlugu:  " + cizilecekData.Length);
             foreach (var series in grafik.Series)
             {
                 series.Points.Clear();
             }
 
-            for (int i = 1; i <= 18; i++)
+            for (int i = 0; i < 18; i++)
             {
-                grafik.Series["D1"].Points.AddXY(i, Int32.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                
+                grafik.Series["D1"].Points.AddXY(i, Int64.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
                                                                                     // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
             }
 
@@ -280,6 +301,7 @@ namespace GidaAnalizi
 
                 //butonlarımı pasif hale getiriyorum
                 getRefBtn.Enabled = false;
+                disconnectBtn.Enabled = false;
                 dataSaveBtn.Enabled = false;
             }
 
@@ -299,6 +321,8 @@ namespace GidaAnalizi
             {
                 comboBoxDevice.Items.Add(port);
             }
+
+
         }
 
 
