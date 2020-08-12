@@ -174,15 +174,18 @@ namespace GidaAnalizi
                 if(foodTypeInput.Text == "")
                 {
                     foodType = foodTypeComboBox.Text;
+
                 }
                 else//eğer input olarak girdiyse food type ı inputtan alıyorum ayrıca comboboxa ekliyorum
                 {
                     foodType = foodTypeInput.Text;
+                    foodTypeInput.Text = "";
 
                     if (!foodTypeComboBox.Items.Contains(foodType))
                     {
                         foodTypeComboBox.Items.Add(foodType);
                     }
+
 
                 }
                 //cihaza 'S' komutunu gönderiyorum
