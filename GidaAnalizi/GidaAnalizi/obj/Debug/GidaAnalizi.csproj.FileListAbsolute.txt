@@ -49,3 +49,4 @@ C:\Users\hibra\Desktop\stajProjeTestBugs\GidaTestAnalizCihazi_ArayuzUygulamasi\G
 C:\Users\hibra\Desktop\stajProjeTestBugs\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.exe
 C:\Users\hibra\Desktop\stajProjeTestBugs\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.pdb
 C:\Users\ribat\OneDrive\Masaüstü\GidaTestAnalizCihazi_ArayuzUygulamasi-master\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.Form2.resources
+C:\Users\hibra\Desktop\stajProje\GidaTestAnalizCihazi_ArayuzUygulamasi\GidaAnalizi\GidaAnalizi\obj\Debug\GidaAnalizi.Form2.resources

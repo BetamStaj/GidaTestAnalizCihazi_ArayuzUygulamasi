@@ -28,6 +28,7 @@ namespace GidaAnalizi
             //portlari tariyorum
             portlariGuncelle();
 
+            
 
             //grafigin ayarlarini yapiyorum
             grafik.Titles.Add("Food Analyze");
@@ -129,8 +130,10 @@ namespace GidaAnalizi
                     uyariVer("Porta bağlanmakta sorun yaşandı", "bağlandığınız portu kontrol ediniz..");
                 }
 
-
-
+            }
+            else
+            {
+                uyariVer("porta bağlanmadı","lütfen bir port seçiniz");
             }
 
             //eğer bağlantı gerçekleştiyse disconnect olmadan bağlanmasın diye connect butonunu pasif yapıyorum
@@ -153,7 +156,7 @@ namespace GidaAnalizi
             //Bu fonksiyonun amacı cihaza S komutunu göndermek. cihaz ise S kodunu aldığında cevap olarak
             // 18 satır 1 sutündan oluşan bir veri kümesi gönderecek.
             //bu datayı port_DataReceived fonksiyonunda alıcam
-
+            
             //cihaza komutu gönderiyorum
             ComPort.Write("S");
         }
@@ -186,6 +189,8 @@ namespace GidaAnalizi
                         foodTypeComboBox.Items.Add(foodType);
                     }
 
+                    foodTypeComboBox.Text = foodType;
+
 
                 }
                 //cihaza 'S' komutunu gönderiyorum
@@ -202,17 +207,43 @@ namespace GidaAnalizi
             if (serialPort.IsOpen)
             {
 
-               var data = "";
-               //cihazdan gelen datayi aliyorum
-               for (int i = 0; i < 17; i++)
-               {
-                    data += serialPort.ReadLine() + "\n";
-               }
-               data += serialPort.ReadLine();
+                //gelen data:
+                //1#2#3#4#5#6#7#8#9#10#11#12#13#14#15#16#17#18*
+                //bu şekilde
 
 
+                var data = "";
+                int asciCode = 0;
+
+                //cihazdan gelen datayi aliyorum
+                do
+                {
+
+
+                    asciCode = serialPort.ReadByte();
+                    data += (char)asciCode;
+
+
+                } while ((char)asciCode != '*');
+
+
+                if (data[data.Length-1] != '*')
+                {
+                    uyariVer("data alinmadi","cihazdan data duzgun gelmedi!");
+                    return;
+                }
+
+                data = data.Remove(data.Length-1);
                 //datayi cizdirmek icin bir diziye atiyorum
-                var cizilecekData = data.Split('\n');
+                string[] cizilecekData = data.Split('#');
+
+                foreach(string k in cizilecekData)
+                {
+                    Console.Write(k+" ");
+                }
+                Console.WriteLine("");
+                
+
 
                 //grafigi cizdirmek icin fonksiyona gonderiyorum
                 grafigeCiz(cizilecekData);
@@ -220,6 +251,12 @@ namespace GidaAnalizi
 
 
                 String dosyayaKaydedilecekData = "";
+                string formatliData = "";
+                for (int i = 0; i < cizilecekData.Length; i++)
+                {
+                    formatliData = formatliData + cizilecekData[i] + " ";
+                }
+
 
                 //eğer get referance butonuna tıklanırak 'S' komutu gönderildiyse buraya girecek
                 if (getRefBtn.Enabled == true)
@@ -227,7 +264,11 @@ namespace GidaAnalizi
 
                     //get referance butonuna tıklandığı için datayı dosyaya kaydetmeden önce başlık olarak referans verisi yazıyorum
                     dosyayaKaydedilecekData = "- - - referans verisi - - - \n" ;
-                    dosyayaKaydedilecekData += data;
+                    
+                    //formatli datayı dosyaya keydedilecek dataya ekliyorum
+                    dosyayaKaydedilecekData += formatliData;
+
+
 
                     //get referance butonunu pasif yapıyorum analyze butonunu aktif hale getiriyorum
                     getRefBtn.Enabled = false;
@@ -239,12 +280,7 @@ namespace GidaAnalizi
                     //analyze butonuna tıklandığı için datayı dosyaya kaydetmeden önce food type ını başlık olarak ekliyorum
                     dosyayaKaydedilecekData = "- - - "+ foodType +" - - -\n";
                     
-                    //veriler tek satır 18 sütun şeklinde kaydediliyor o yüzden datayı formatlıyorum
-                    string formatliData = "";
-                    for(int i = 0; i < cizilecekData.Length; i++)
-                    {
-                        formatliData = formatliData + cizilecekData[i] +" ";
-                    }
+                    
                     //formatli datayı dosyaya keydedilecek dataya ekliyorum
                     dosyayaKaydedilecekData += formatliData; 
 
