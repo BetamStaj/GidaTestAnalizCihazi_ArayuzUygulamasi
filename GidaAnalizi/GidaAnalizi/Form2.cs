@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,34 @@ namespace GidaAnalizi
             InitializeComponent();
             FormBorderStyle = FormBorderStyle.None;
         }
+
+        private Food food;
+        public Form2(Food food)
+        {
+            InitializeComponent();
+            FormBorderStyle = FormBorderStyle.None;
+            this.food = food;
+
+
+
+
+            //grafigin ayarlarini yapiyorum
+            grafik.Titles.Add("Food Analyze");
+            var chart = grafik.ChartAreas[0];
+            chart.AxisX.Minimum = 1;
+            chart.AxisX.Maximum = food.datalar.Count; // x ekseninin sınırları belirlendi.
+            chart.AxisY.Minimum = 0;
+            chart.AxisY.Maximum = 100; // y ekseninin sınırları belirlendi.
+            chart.AxisY.Interval = 10; // y ekseninin araligi belirlendi.
+            grafik.Series["D1"].Color = Color.Red;
+
+
+            grafigeCiz(food.datalar);
+
+
+        }
+
+
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);
@@ -58,11 +87,11 @@ namespace GidaAnalizi
                     {
                         if (saveFileDialog.FilterIndex == 2)
                         {
-                            chart1.SaveImage(saveFileDialog.FileName, ChartImageFormat.Jpeg);
+                            grafik.SaveImage(saveFileDialog.FileName, ChartImageFormat.Jpeg);
                         }
                         else if (saveFileDialog.FilterIndex == 1)
                         {
-                            chart1.SaveImage(saveFileDialog.FileName, ChartImageFormat.Png);
+                            grafik.SaveImage(saveFileDialog.FileName, ChartImageFormat.Png);
                         }
 
                     }
@@ -76,6 +105,31 @@ namespace GidaAnalizi
                     MessageBox.Show(ex.Message);
                 }
             }
+
+        }
+
+
+        public void grafigeCiz(ArrayList datalar)
+        {
+
+            foreach (var series in grafik.Series)
+            {
+                series.Points.Clear();
+            }
+
+            
+            for (int i = 0; i < datalar.Count; i++)
+            {
+
+                grafik.Series["D1"].Points.AddXY(i, datalar[i]); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                                                                                    // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
+            }
+
+        }
+
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
 
         }
     }

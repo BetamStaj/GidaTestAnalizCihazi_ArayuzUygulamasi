@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
@@ -8,10 +9,13 @@ using System.Windows.Forms.VisualStyles;
 
 namespace GidaAnalizi
 {
+
     public partial class Form1 : Form
     {
 
         private SerialPort ComPort;
+        private ArrayList foods;
+
 
         public Form1()
         {
@@ -29,6 +33,7 @@ namespace GidaAnalizi
             portlariGuncelle();
 
             
+            
 
             //grafigin ayarlarini yapiyorum
             grafik.Titles.Add("Food Analyze");
@@ -40,6 +45,8 @@ namespace GidaAnalizi
             chart.AxisY.Interval = 10; // y ekseninin araligi belirlendi.
             grafik.Series["D1"].Color = Color.Red;
 
+
+          
 
 
         }
@@ -118,6 +125,7 @@ namespace GidaAnalizi
                     getRefBtn.Enabled = false;
                     dataSaveBtn.Enabled = true;
                     disconnectBtn.Enabled = true;
+                    newmsrmntBtn.Enabled = true;
 
                 }//hatalarimi kontrol ediyorum
                 catch (UnauthorizedAccessException) { hataVarMi = true; }
@@ -193,8 +201,12 @@ namespace GidaAnalizi
 
 
                 }
+
                 //cihaza 'S' komutunu gönderiyorum
                 ComPort.Write("S");
+
+                //plotExport butonunu aktif hale getiriyorum
+                plotexportBtn.Enabled = true;
             }           
 
         }
@@ -219,21 +231,23 @@ namespace GidaAnalizi
                 do
                 {
 
-
                     asciCode = serialPort.ReadByte();
                     data += (char)asciCode;
 
 
                 } while ((char)asciCode != '*');
 
-
+                //datanin sonunda yıldız karakteri var mı diye kontrol ediyorum
                 if (data[data.Length-1] != '*')
                 {
+                    //uyarı verip işlemi bitiriyorum
                     uyariVer("data alinmadi","cihazdan data duzgun gelmedi!");
                     return;
                 }
 
+                //sondaki yıldızı çıkarıyorum
                 data = data.Remove(data.Length-1);
+
                 //datayi cizdirmek icin bir diziye atiyorum
                 string[] cizilecekData = data.Split('#');
 
@@ -299,22 +313,53 @@ namespace GidaAnalizi
 
         public void grafigeCiz(String[] cizilecekData)
         {
-            Console.WriteLine("datam: uzunlugu:  " + cizilecekData.Length);
+
+            //grafigi temizliyorum
             foreach (var series in grafik.Series)
             {
                 series.Points.Clear();
             }
 
+
+            if (foodType.Equals(""))
+            {
+                foodType = "referansVerisi";
+            }
+
+            Food food = foundFood(foodType);
+                
+
             for (int i = 0; i < 18; i++)
             {
                 
+                food.datalar.Add(Int64.Parse(cizilecekData[i]));   
                 grafik.Series["D1"].Points.AddXY(i, Int64.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
                                                                                     // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
             }
 
-
         }
 
+
+        //aranan ada gore arraylisteki foodu buluyorum
+        public Food foundFood(string foodName)
+        {
+            //foods araylistini dönüyorum
+            foreach (Food food in foods)
+            {
+                
+                if (food.foodName.Equals(foodName))
+                {
+                    return food;
+                }
+            }
+
+            //eğer bu isme sahip bir food yoksa yeni food oluşturup onu dönüyorum
+            Food newFood = new Food(foodName);
+            foods.Add(newFood);
+            
+            return newFood;
+
+        }
 
 
 
@@ -369,6 +414,11 @@ namespace GidaAnalizi
         //Save data butonuna tıklandığında çalışacak olan fonksiyon
         private void dataSaveBtn_Click(object sender, EventArgs e)
         {
+
+            //foodları tutan arraylistimi oluşturuyorum
+            foods = new ArrayList();
+
+
             //Save Data butonuna tıklandığında kaydedilecek olan verinin yeri ve adı belirlenmeli
             //burda bir file manager açılıp dosayanın nereye kaydedileceği ve adının ne olacağı belirleniliyor
 
@@ -399,7 +449,6 @@ namespace GidaAnalizi
 
             }
 
-            plotexportBtn.Enabled = true;
 
 
         }
@@ -415,9 +464,49 @@ namespace GidaAnalizi
 
         private void plotexportBtn_Click(object sender, EventArgs e)
         {
-            
-            Form2 f2 = new Form2();
-            f2.ShowDialog();
+
+            string foodName = foodTypeComboBox.Text;
+
+            foreach (Food food in foods)
+            {
+
+                if (food.foodName.Equals(foodName))
+                {
+                    Form2 f2 = new Form2(food);
+                    f2.ShowDialog();
+                    return;
+                }
+
+            }
+
+            uyariVer("foodType hatali","comboboxta seçtiğiniz foodType hatali lütfen geçerli foodType ını giriniz!!");
+
+
+        }
+
+        //bağlantı hariç herşeyi sıfırlıyorum
+        private void newmsrmntBtn_Click(object sender, EventArgs e)
+        {
+            //foodları tutan dizimi sıfırlorum
+            foods = null;
+
+            //grafigi temizliyorum
+            foreach (var series in grafik.Series)
+            {
+                series.Points.Clear();
+            }
+
+            kaydedilecekDosyaPathi = "";
+
+            butonlariPasifYap();
+            disconnectBtn.Enabled = true;
+            dataSaveBtn.Enabled = true;
+
+            foodTypeInput.Text = "";
+
+            foodTypeComboBox.Items.Clear();
+            foodTypeComboBox.Text = "";
+
         }
     }
 }
