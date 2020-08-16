@@ -152,6 +152,7 @@ namespace GidaAnalizi
 
         }
 
+        //uyarı vermek için kullandığım fonksiyon
         public void uyariVer(string baslik, string aciklama)
         {
             MessageBox.Show(aciklama, baslik, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -321,21 +322,32 @@ namespace GidaAnalizi
             }
 
 
+            
+            //Grafiğe çizdirirken datalarımı bir objeye atıyorum
+            
+            //eğer foodType boş ise bu demek oluyor ki GetReferans butonuna tıklandı ve referans verileri ekrana basılıyor
             if (foodType.Equals(""))
             {
+                //foodType ını referansVerisi olarak giriyorum
                 foodType = "referansVerisi";
             }
 
+            //artık foodType'ın her türlü bir değere sahip
+            //foodType'ına göre foods araylistinden Food objesini getiriyorum eğer o foodType adında bir obje yok ise
+            //yeni bir Food objesi oluşturuyorum
             Food food = foundFood(foodType);
-                
 
+
+            //grafiği ekrana çizdiriyorum
             for (int i = 0; i < 18; i++)
             {
-                
-                food.datalar.Add(Int64.Parse(cizilecekData[i]));   
+                //food objesinin datasına dataları ekliyorum
+                food.datalar.Add(Int64.Parse(cizilecekData[i]));
+                //grafiğe değeri çizdiriyorum
                 grafik.Series["D1"].Points.AddXY(i, Int64.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
                                                                                     // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
             }
+
 
         }
 
@@ -347,14 +359,17 @@ namespace GidaAnalizi
             foreach (Food food in foods)
             {
                 
+                //foodName lerine göre bir arama yapıyorum
                 if (food.foodName.Equals(foodName))
                 {
+                    //o foodName ait objeyi döndürüyorum
                     return food;
                 }
             }
 
             //eğer bu isme sahip bir food yoksa yeni food oluşturup onu dönüyorum
             Food newFood = new Food(foodName);
+            //Food objelerimi tutan foods araylistime yeni Food objemi ekliyorum
             foods.Add(newFood);
             
             return newFood;
@@ -441,7 +456,7 @@ namespace GidaAnalizi
                 getRefBtn.Enabled = true;
 
 
-            }
+            }   
             else
             {
                 getRefBtn.Enabled = false;
@@ -453,6 +468,7 @@ namespace GidaAnalizi
 
         }
 
+        //string olarak gönderdiğim yazıları dosyaya kaydediyor
         public void dosyayaKaydet(string kaydedilecekVeri)
         {
 
@@ -464,14 +480,17 @@ namespace GidaAnalizi
 
         private void plotexportBtn_Click(object sender, EventArgs e)
         {
-
+            //gösterilecek olan foodType i alıyorum
             string foodName = foodTypeComboBox.Text;
 
+            //Food objelerimi geziyorum
             foreach (Food food in foods)
             {
 
+                //foodName ine göre bir arama yapıyorum
                 if (food.foodName.Equals(foodName))
                 {
+                    //açacağım 2. ekrana Food objemi gönderiyorum
                     Form2 f2 = new Form2(food);
                     f2.ShowDialog();
                     return;
@@ -479,6 +498,7 @@ namespace GidaAnalizi
 
             }
 
+            //eğer Food objesi bulunmadıysa demek ki comboboxtaki foodType ı hatalı
             uyariVer("foodType hatali","comboboxta seçtiğiniz foodType hatali lütfen geçerli foodType ını giriniz!!");
 
 
@@ -487,6 +507,17 @@ namespace GidaAnalizi
         //bağlantı hariç herşeyi sıfırlıyorum
         private void newmsrmntBtn_Click(object sender, EventArgs e)
         {
+
+            //bir onay ekrani gosteriyorum resetlemeye emin misiniz diye?
+            DialogResult result = MessageBox.Show("Baglanti haric her sey sifirlansin mi?", "Plot And Export", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            //eğer onaylamazsa işlemi yapmadan bitiriyorum
+            if (!result.Equals(DialogResult.OK))
+            {
+                return;
+            }
+
+            //eğer onaylamışsa aşağıdaki kodlar çalışacak
+
             //foodları tutan dizimi sıfırlorum
             foods = null;
 
@@ -496,15 +527,19 @@ namespace GidaAnalizi
                 series.Points.Clear();
             }
 
+            //saveData butonunda seçilen dosyanın kaydedileceği pathi resetliyorum
             kaydedilecekDosyaPathi = "";
 
+            //bütün butonları pasif yapıyorum
             butonlariPasifYap();
             disconnectBtn.Enabled = true;
             dataSaveBtn.Enabled = true;
 
+            //food Type ın girildiği inputu sıfırlıyorum
             foodTypeInput.Text = "";
-
+            //comboboxtaki itemleri siliyorum
             foodTypeComboBox.Items.Clear();
+            //comboboxun textini resetliyorum
             foodTypeComboBox.Text = "";
 
         }

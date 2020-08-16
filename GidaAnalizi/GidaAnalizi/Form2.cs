@@ -44,6 +44,8 @@ namespace GidaAnalizi
 
             grafigeCiz(food.datalar);
 
+            foodName.Text = food.foodName;
+
 
         }
 
@@ -129,6 +131,11 @@ namespace GidaAnalizi
 
 
         private void chart1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
