@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -105,7 +105,7 @@
             this.comboBoxDevice.ForeColor = System.Drawing.SystemColors.MenuBar;
             this.comboBoxDevice.FormattingEnabled = true;
             this.comboBoxDevice.Location = new System.Drawing.Point(205, 89);
-            this.comboBoxDevice.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxDevice.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxDevice.Name = "comboBoxDevice";
             this.comboBoxDevice.Size = new System.Drawing.Size(151, 28);
             this.comboBoxDevice.TabIndex = 15;
@@ -117,7 +117,7 @@
             this.disconnectBtn.Font = new System.Drawing.Font("Segoe UI Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.disconnectBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.disconnectBtn.Location = new System.Drawing.Point(24, 150);
-            this.disconnectBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.disconnectBtn.Margin = new System.Windows.Forms.Padding(4);
             this.disconnectBtn.Name = "disconnectBtn";
             this.disconnectBtn.Size = new System.Drawing.Size(145, 39);
             this.disconnectBtn.TabIndex = 16;
@@ -132,7 +132,7 @@
             this.connectBtn.Font = new System.Drawing.Font("Segoe UI Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.connectBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.connectBtn.Location = new System.Drawing.Point(177, 150);
-            this.connectBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.connectBtn.Margin = new System.Windows.Forms.Padding(4);
             this.connectBtn.Name = "connectBtn";
             this.connectBtn.Size = new System.Drawing.Size(203, 39);
             this.connectBtn.TabIndex = 17;
@@ -147,7 +147,7 @@
             this.dataSaveBtn.Font = new System.Drawing.Font("Segoe UI Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.dataSaveBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.dataSaveBtn.Location = new System.Drawing.Point(24, 208);
-            this.dataSaveBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataSaveBtn.Margin = new System.Windows.Forms.Padding(4);
             this.dataSaveBtn.Name = "dataSaveBtn";
             this.dataSaveBtn.Size = new System.Drawing.Size(145, 42);
             this.dataSaveBtn.TabIndex = 18;
@@ -162,7 +162,7 @@
             this.getRefBtn.Font = new System.Drawing.Font("Segoe UI Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.getRefBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.getRefBtn.Location = new System.Drawing.Point(177, 208);
-            this.getRefBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.getRefBtn.Margin = new System.Windows.Forms.Padding(4);
             this.getRefBtn.Name = "getRefBtn";
             this.getRefBtn.Size = new System.Drawing.Size(203, 42);
             this.getRefBtn.TabIndex = 19;
@@ -173,9 +173,10 @@
             // foodTypeComboBox
             // 
             this.foodTypeComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
+            this.foodTypeComboBox.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.foodTypeComboBox.FormattingEnabled = true;
             this.foodTypeComboBox.Location = new System.Drawing.Point(24, 354);
-            this.foodTypeComboBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.foodTypeComboBox.Margin = new System.Windows.Forms.Padding(4);
             this.foodTypeComboBox.Name = "foodTypeComboBox";
             this.foodTypeComboBox.Size = new System.Drawing.Size(160, 24);
             this.foodTypeComboBox.TabIndex = 20;
@@ -183,7 +184,7 @@
             // foodTypeInput
             // 
             this.foodTypeInput.Location = new System.Drawing.Point(24, 399);
-            this.foodTypeInput.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.foodTypeInput.Margin = new System.Windows.Forms.Padding(4);
             this.foodTypeInput.Name = "foodTypeInput";
             this.foodTypeInput.Size = new System.Drawing.Size(160, 22);
             this.foodTypeInput.TabIndex = 21;
@@ -195,7 +196,7 @@
             this.analyzeBtn.Font = new System.Drawing.Font("Segoe UI Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.analyzeBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.analyzeBtn.Location = new System.Drawing.Point(232, 354);
-            this.analyzeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.analyzeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.analyzeBtn.Name = "analyzeBtn";
             this.analyzeBtn.Size = new System.Drawing.Size(148, 48);
             this.analyzeBtn.TabIndex = 22;
@@ -210,7 +211,7 @@
             this.plotexportBtn.Font = new System.Drawing.Font("Segoe UI Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.plotexportBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.plotexportBtn.Location = new System.Drawing.Point(83, 475);
-            this.plotexportBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.plotexportBtn.Margin = new System.Windows.Forms.Padding(4);
             this.plotexportBtn.Name = "plotexportBtn";
             this.plotexportBtn.Size = new System.Drawing.Size(216, 53);
             this.plotexportBtn.TabIndex = 23;
@@ -225,7 +226,7 @@
             this.newmsrmntBtn.Font = new System.Drawing.Font("Segoe UI Light", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.newmsrmntBtn.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.newmsrmntBtn.Location = new System.Drawing.Point(83, 551);
-            this.newmsrmntBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.newmsrmntBtn.Margin = new System.Windows.Forms.Padding(4);
             this.newmsrmntBtn.Name = "newmsrmntBtn";
             this.newmsrmntBtn.Size = new System.Drawing.Size(216, 54);
             this.newmsrmntBtn.TabIndex = 24;
@@ -236,18 +237,20 @@
             // grafik
             // 
             this.grafik.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
-            chartArea1.Name = "ChartArea1";
-            this.grafik.ChartAreas.Add(chartArea1);
-            legend1.Name = "D1";
-            this.grafik.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.grafik.ChartAreas.Add(chartArea2);
+            legend2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
+            legend2.ForeColor = System.Drawing.Color.White;
+            legend2.Name = "D1";
+            this.grafik.Legends.Add(legend2);
             this.grafik.Location = new System.Drawing.Point(451, 89);
-            this.grafik.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.grafik.Margin = new System.Windows.Forms.Padding(4);
             this.grafik.Name = "grafik";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "D1";
-            series1.Name = "D1";
-            this.grafik.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Legend = "D1";
+            series2.Name = "D1";
+            this.grafik.Series.Add(series2);
             this.grafik.Size = new System.Drawing.Size(896, 551);
             this.grafik.TabIndex = 31;
             this.grafik.Text = "chart1";
@@ -270,7 +273,7 @@
             // 
             this.pictureBox5.Image = global::GidaAnalizi.Properties.Resources.altKısım1;
             this.pictureBox5.Location = new System.Drawing.Point(-1, 686);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(1363, 90);
             this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -281,7 +284,7 @@
             // 
             this.pictureBox4.Image = global::GidaAnalizi.Properties.Resources.cizgi3;
             this.pictureBox4.Location = new System.Drawing.Point(415, 59);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(1, 587);
             this.pictureBox4.TabIndex = 27;
@@ -291,7 +294,7 @@
             // 
             this.pictureBox3.Image = global::GidaAnalizi.Properties.Resources.cizgi2;
             this.pictureBox3.Location = new System.Drawing.Point(7, 444);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(393, 12);
             this.pictureBox3.TabIndex = 26;
@@ -301,7 +304,7 @@
             // 
             this.pictureBox2.Image = global::GidaAnalizi.Properties.Resources.cizgi2;
             this.pictureBox2.Location = new System.Drawing.Point(7, 268);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(393, 12);
             this.pictureBox2.TabIndex = 25;
@@ -314,7 +317,7 @@
             this.minimizeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.minimizeBtn.Image = global::GidaAnalizi.Properties.Resources.yeniMinimize;
             this.minimizeBtn.Location = new System.Drawing.Point(1247, 9);
-            this.minimizeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.minimizeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.minimizeBtn.Name = "minimizeBtn";
             this.minimizeBtn.Size = new System.Drawing.Size(43, 39);
             this.minimizeBtn.TabIndex = 11;
@@ -329,7 +332,7 @@
             this.CloseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseBtn.Image = global::GidaAnalizi.Properties.Resources.yeniClose1;
             this.CloseBtn.Location = new System.Drawing.Point(1303, 9);
-            this.CloseBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CloseBtn.Margin = new System.Windows.Forms.Padding(4);
             this.CloseBtn.Name = "CloseBtn";
             this.CloseBtn.Size = new System.Drawing.Size(43, 39);
             this.CloseBtn.TabIndex = 10;
@@ -343,7 +346,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::GidaAnalizi.Properties.Resources.cizgi1;
             this.pictureBox1.Location = new System.Drawing.Point(-37, 55);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(4239, 2);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -379,7 +382,7 @@
             this.Controls.Add(this.minimizeBtn);
             this.Controls.Add(this.CloseBtn);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "d";
             this.Load += new System.EventHandler(this.Form1_Load);

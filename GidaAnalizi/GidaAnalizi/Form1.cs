@@ -37,7 +37,17 @@ namespace GidaAnalizi
 
             //grafigin ayarlarini yapiyorum
             grafik.Titles.Add("Food Analyze");
+            grafik.Titles[0].ForeColor = Color.White;
             var chart = grafik.ChartAreas[0];
+            grafik.ChartAreas[0].AxisX.LineColor = Color.White;
+            grafik.ChartAreas[0].AxisY.LineColor = Color.White;
+            grafik.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
+            grafik.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;
+            grafik.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.White;
+            grafik.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.White;
+            grafik.ChartAreas[0].BackColor = Color.FromArgb(41, 53, 65);
+            grafik.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.FromArgb(41,53,65);
+            grafik.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.FromArgb(41, 53, 65);
             chart.AxisX.Minimum = 1;
             chart.AxisX.Maximum = 18; // x ekseninin sınırları belirlendi.
             chart.AxisY.Minimum = 0;
