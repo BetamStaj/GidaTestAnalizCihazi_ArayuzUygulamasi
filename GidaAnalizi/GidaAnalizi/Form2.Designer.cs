@@ -30,13 +30,13 @@
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.minimizeBtn = new System.Windows.Forms.Button();
             this.CloseBtn = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.grafik = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.foodName = new System.Windows.Forms.Label();
+            this.ortalamasiBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grafik)).BeginInit();
@@ -101,16 +101,13 @@
             this.grafik.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
             chartArea1.Name = "ChartArea1";
             this.grafik.ChartAreas.Add(chartArea1);
+            legend1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
+            legend1.ForeColor = System.Drawing.Color.White;
             legend1.Name = "Legend1";
             this.grafik.Legends.Add(legend1);
             this.grafik.Location = new System.Drawing.Point(16, 114);
             this.grafik.Margin = new System.Windows.Forms.Padding(4);
             this.grafik.Name = "grafik";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Legend = "Legend1";
-            series1.Name = "D1";
-            this.grafik.Series.Add(series1);
             this.grafik.Size = new System.Drawing.Size(1412, 631);
             this.grafik.TabIndex = 33;
             this.grafik.Text = "chart1";
@@ -129,12 +126,23 @@
             this.foodName.Text = "label1";
             this.foodName.Click += new System.EventHandler(this.label1_Click);
             // 
+            // ortalamasiBtn
+            // 
+            this.ortalamasiBtn.Location = new System.Drawing.Point(1220, 61);
+            this.ortalamasiBtn.Name = "ortalamasiBtn";
+            this.ortalamasiBtn.Size = new System.Drawing.Size(105, 41);
+            this.ortalamasiBtn.TabIndex = 35;
+            this.ortalamasiBtn.Text = "button1";
+            this.ortalamasiBtn.UseVisualStyleBackColor = true;
+            this.ortalamasiBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(53)))), ((int)(((byte)(65)))));
             this.ClientSize = new System.Drawing.Size(1444, 841);
+            this.Controls.Add(this.ortalamasiBtn);
             this.Controls.Add(this.foodName);
             this.Controls.Add(this.grafik);
             this.Controls.Add(this.pictureBox1);
@@ -160,5 +168,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataVisualization.Charting.Chart grafik;
         private System.Windows.Forms.Label foodName;
+        private System.Windows.Forms.Button ortalamasiBtn;
     }
 }

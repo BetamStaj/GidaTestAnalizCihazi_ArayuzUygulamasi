@@ -51,8 +51,8 @@ namespace GidaAnalizi
             chart.AxisX.Minimum = 1;
             chart.AxisX.Maximum = 18; // x ekseninin sınırları belirlendi.
             chart.AxisY.Minimum = 0;
-            chart.AxisY.Maximum = 100; // y ekseninin sınırları belirlendi.
-            chart.AxisY.Interval = 10; // y ekseninin araligi belirlendi.
+            chart.AxisY.Maximum = 1000; // y ekseninin sınırları belirlendi.
+            chart.AxisY.Interval = 100; // y ekseninin araligi belirlendi.
             grafik.Series["D1"].Color = Color.Red;
 
 
@@ -175,9 +175,8 @@ namespace GidaAnalizi
             //Bu fonksiyonun amacı cihaza S komutunu göndermek. cihaz ise S kodunu aldığında cevap olarak
             // 18 satır 1 sutündan oluşan bir veri kümesi gönderecek.
             //bu datayı port_DataReceived fonksiyonunda alıcam
-            
             //cihaza komutu gönderiyorum
-            ComPort.Write("S");
+            ComPort.Write("s");
         }
 
         //foodType bilgisini tutan değişken
@@ -213,8 +212,8 @@ namespace GidaAnalizi
 
                 }
 
-                //cihaza 'S' komutunu gönderiyorum
-                ComPort.Write("S");
+                //cihaza 's' komutunu gönderiyorum
+                ComPort.Write("s");
 
                 //plotExport butonunu aktif hale getiriyorum
                 plotexportBtn.Enabled = true;
@@ -225,10 +224,12 @@ namespace GidaAnalizi
         //cihazdan bir data geldiğinde burası çalışıyor
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
+            Console.WriteLine("??");
             var serialPort = (SerialPort)sender;
            
             if (serialPort.IsOpen)
             {
+                Console.WriteLine("??<geldi>");
 
                 //gelen data:
                 //1#2#3#4#5#6#7#8#9#10#11#12#13#14#15#16#17#18*
@@ -236,9 +237,9 @@ namespace GidaAnalizi
 
 
                 var data = "";
-                int asciCode = 0;
 
                 //cihazdan gelen datayi aliyorum
+                /*
                 do
                 {
 
@@ -247,27 +248,30 @@ namespace GidaAnalizi
 
 
                 } while ((char)asciCode != '*');
-
-                //datanin sonunda yıldız karakteri var mı diye kontrol ediyorum
-                if (data[data.Length-1] != '*')
+                */
+                for(int i = 0; i < 18; i++)
                 {
-                    //uyarı verip işlemi bitiriyorum
-                    uyariVer("data alinmadi","cihazdan data duzgun gelmedi!");
-                    return;
+                    data += serialPort.ReadLine();
                 }
-
-                //sondaki yıldızı çıkarıyorum
-                data = data.Remove(data.Length-1);
-
-                //datayi cizdirmek icin bir diziye atiyorum
-                string[] cizilecekData = data.Split('#');
-
-                foreach(string k in cizilecekData)
-                {
-                    Console.Write(k+" ");
-                }
-                Console.WriteLine("");
                 
+                
+                //datayi cizdirmek icin bir diziye atiyorum
+                string[] cizilecekData = data.Split('\r');
+
+                
+                for(int i = 0; i < cizilecekData.Length; i++)
+                {
+
+                    cizilecekData[i] = cizilecekData[i].Replace("\n", "").Replace("\r", "");
+
+                }
+
+                Console.WriteLine("----");
+                foreach (string k in cizilecekData)
+                {
+                        
+                    Console.Write(k+"-");
+                }
 
 
                 //grafigi cizdirmek icin fonksiyona gonderiyorum
@@ -332,9 +336,9 @@ namespace GidaAnalizi
             }
 
 
-            
+
             //Grafiğe çizdirirken datalarımı bir objeye atıyorum
-            
+
             //eğer foodType boş ise bu demek oluyor ki GetReferans butonuna tıklandı ve referans verileri ekrana basılıyor
             if (foodType.Equals(""))
             {
@@ -352,9 +356,9 @@ namespace GidaAnalizi
             for (int i = 0; i < 18; i++)
             {
                 //food objesinin datasına dataları ekliyorum
-                food.datalar.Add(Int64.Parse(cizilecekData[i]));
+                food.datalar.Add(float.Parse(cizilecekData[i]));
                 //grafiğe değeri çizdiriyorum
-                grafik.Series["D1"].Points.AddXY(i, Int64.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                grafik.Series["D1"].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
                                                                                     // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
             }
 

@@ -33,16 +33,25 @@ namespace GidaAnalizi
 
             //grafigin ayarlarini yapiyorum
             grafik.Titles.Add("Food Analyze");
+            grafik.Titles[0].ForeColor = Color.White;
             var chart = grafik.ChartAreas[0];
+            grafik.ChartAreas[0].AxisX.LineColor = Color.White;
+            grafik.ChartAreas[0].AxisY.LineColor = Color.White;
+            grafik.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
+            grafik.ChartAreas[0].AxisY.LabelStyle.ForeColor = Color.White;
+            grafik.ChartAreas[0].AxisX.MajorTickMark.LineColor = Color.White;
+            grafik.ChartAreas[0].AxisY.MajorTickMark.LineColor = Color.White;
+            grafik.ChartAreas[0].BackColor = Color.FromArgb(41, 53, 65);
+            grafik.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.FromArgb(41, 53, 65);
+            grafik.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.FromArgb(41, 53, 65);
             chart.AxisX.Minimum = 1;
-            chart.AxisX.Maximum = food.datalar.Count; // x ekseninin sınırları belirlendi.
+            chart.AxisX.Maximum = 18; // x ekseninin sınırları belirlendi.
             chart.AxisY.Minimum = 0;
-            chart.AxisY.Maximum = 100; // y ekseninin sınırları belirlendi.
-            chart.AxisY.Interval = 10; // y ekseninin araligi belirlendi.
-            grafik.Series["D1"].Color = Color.Red;
+            chart.AxisY.Maximum = 1000; // y ekseninin sınırları belirlendi.
+            chart.AxisY.Interval = 100; // y ekseninin araligi belirlendi.
 
 
-            grafigeCiz(food.datalar);
+            grafigeCiz();
 
             foodName.Text = food.foodName;
 
@@ -111,22 +120,29 @@ namespace GidaAnalizi
         }
 
 
-        public void grafigeCiz(ArrayList datalar)
+        public void grafigeCiz()
         {
-
+            
             foreach (var series in grafik.Series)
             {
                 series.Points.Clear();
             }
-
             
-            for (int i = 0; i < datalar.Count; i++)
+            
+            for (int j =0;j< food.datalar.Count/18;j++)
             {
+                string seriesName = $"{food.foodName} - {j+1}";
+                grafik.Series.Add(new Series(seriesName));
+                grafik.Series[seriesName].ChartType = SeriesChartType.Spline;
+                grafik.Series[seriesName].BorderWidth = 2;
 
-                grafik.Series["D1"].Points.AddXY(i, datalar[i]); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
-                                                                                    // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
+                for (int i = 0; i < 18; i++)
+                {
+                    grafik.Series[seriesName].Points.AddXY(i, food.datalar[i + (j * 18)]); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+               
+                }
+
             }
-
         }
 
 
@@ -137,6 +153,45 @@ namespace GidaAnalizi
 
         private void label1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            Food cizilecekFood = new Food(food.foodName);
+
+            float toplam = 0;
+            int kacTaneFoodVar = food.datalar.Count / 18;
+            for (int i = 0; i < 18; i++)
+            {
+
+                for(int j = 0; j < kacTaneFoodVar; j++)
+                {
+
+                    toplam += float.Parse( food.datalar[i + (j * 18)].ToString() );
+                    
+                }
+
+                cizilecekFood.datalar.Add(toplam/kacTaneFoodVar);
+
+            }
+
+
+                string seriesName = $"{food.foodName}";
+                grafik.Series.Add(new Series(seriesName));
+                grafik.Series[seriesName].ChartType = SeriesChartType.Spline;
+                grafik.Series[seriesName].BorderWidth = 5;
+                grafik.Series[seriesName].Color = Color.White;
+
+            Console.WriteLine("s:" + cizilecekFood.datalar.Count);
+                for (int i = 0; i < cizilecekFood.datalar.Count; i++)
+                {
+                    grafik.Series[seriesName].Points.AddXY(i, food.datalar[i]); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                }
+
+            ortalamasiBtn.Enabled = false;
+
 
         }
     }
