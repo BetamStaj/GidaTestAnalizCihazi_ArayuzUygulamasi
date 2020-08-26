@@ -18,7 +18,6 @@ namespace GidaAnalizi
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
-                Console.WriteLine("?");
                 Application.Run(new Form1());
 
             }

@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms.VisualStyles;
 
 namespace GidaAnalizi
@@ -52,7 +53,7 @@ namespace GidaAnalizi
             chart.AxisX.Minimum = 1;
             chart.AxisX.Maximum = 18; // x ekseninin sınırları belirlendi.
             chart.AxisY.Minimum = 0;
-            chart.AxisY.Maximum = 1000; // y ekseninin sınırları belirlendi.
+            chart.AxisY.Maximum = 1500; // y ekseninin sınırları belirlendi.
             chart.AxisY.Interval = 100; // y ekseninin araligi belirlendi.
             grafik.Series["D1"].Color = Color.Red;
 
@@ -344,7 +345,7 @@ namespace GidaAnalizi
         }
 
 
-
+        int sayac = 0;
         public void grafigeCiz(String[] cizilecekData)
         {
 
@@ -367,8 +368,18 @@ namespace GidaAnalizi
             {
                 series.Points.Clear();
             }*/
+            System.Threading.Thread.Sleep(50);
 
+            // grafigiTemizle();
+            foreach (var series in grafik.Series)
+            {
+                series.Points.Clear();
+            }
+            
 
+           System.Threading.Thread.Sleep(50);
+
+            
 
 
             //    //Grafiğe çizdirirken datalarımı bir objeye atıyorum
@@ -391,7 +402,9 @@ namespace GidaAnalizi
                 //food objesinin datasına dataları ekliyorum
                 food.datalar.Add(float.Parse(cizilecekData[i]));
                 //grafiğe değeri çizdiriyorum
-               // grafik.Series["D1"].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                //grafik.Series[sayac+""].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+
+                 grafik.Series["D1"].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
             }
 
 
@@ -602,6 +615,15 @@ namespace GidaAnalizi
         {
             foodType = "halil";
             ComPort.Write("s");
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            grafik.Series.Clear();
+        }
+        private void grafigiTemizle()
+        {
+            grafik.Series.Clear();
         }
     }
 }
