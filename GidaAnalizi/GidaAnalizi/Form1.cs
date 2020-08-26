@@ -3,6 +3,7 @@ using System.Collections;
 using System.Drawing;
 using System.IO;
 using System.IO.Ports;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -100,7 +101,9 @@ namespace GidaAnalizi
 
         private void CloseBtn_Click(object sender, EventArgs e)
         {
+            baglantiyiKes();
             Close();
+            Application.Exit();
         }
 
         private void minimizeBtn_Click(object sender, EventArgs e)
@@ -184,10 +187,12 @@ namespace GidaAnalizi
         //analyze butonuna tıklandığında çalışacak olan yer
         private void analyzeBtn_Click_1(object sender, EventArgs e)
         {
+            analyzeButonunuPasifYap();
             //eğer food type bilgisi seçilmemişse kullanıcıya bilgi veriyorum ve işlem yapmıyorum
             if(foodTypeComboBox.Text == "" && foodTypeInput.Text == "")
             {
                 uyariVer("food type girilmedi","lütfen food type ını giriniz!");
+                analyzeButonunuAktifYap();
             }
             else //food type ı input olarak mı yoksa comboboxtan mı seçtiğini bulmaya çalışıyorum
             {
@@ -224,13 +229,11 @@ namespace GidaAnalizi
         //cihazdan bir data geldiğinde burası çalışıyor
         private void port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            Console.WriteLine("??");
             var serialPort = (SerialPort)sender;
            
             if (serialPort.IsOpen)
             {
-                Console.WriteLine("??<geldi>");
-
+                
                 //gelen data:
                 //1#2#3#4#5#6#7#8#9#10#11#12#13#14#15#16#17#18*
                 //bu şekilde
@@ -253,8 +256,16 @@ namespace GidaAnalizi
                 {
                     data += serialPort.ReadLine();
                 }
-                
-                
+
+                if (data.Contains("Pekspec"))
+                {
+                    Console.WriteLine("heyyyyhhhoooo");
+                    int i = data.IndexOf('\r');
+                    data = data.Remove(0,i+1);
+                    data += serialPort.ReadLine();
+                }
+
+
                 //datayi cizdirmek icin bir diziye atiyorum
                 string[] cizilecekData = data.Split('\r');
 
@@ -266,16 +277,15 @@ namespace GidaAnalizi
 
                 }
 
-                Console.WriteLine("----");
-                foreach (string k in cizilecekData)
+                for(int i = 0; i < cizilecekData.Length; i++)
                 {
-                        
-                    Console.Write(k+"-");
+                    Console.WriteLine(cizilecekData[i] + " - ");
                 }
 
 
                 //grafigi cizdirmek icin fonksiyona gonderiyorum
                 grafigeCiz(cizilecekData);
+                analyzeButonunuAktifYap();
 
 
 
@@ -325,42 +335,66 @@ namespace GidaAnalizi
             }
         }
 
+        public void analyzeButonunuAktifYap()
+        {
+            analyzeBtn.Enabled = true;
+        }
+        public void analyzeButonunuPasifYap() {
+            analyzeBtn.Enabled = false;
+        }
+
+
 
         public void grafigeCiz(String[] cizilecekData)
         {
 
-            //grafigi temizliyorum
+
+
+            //    /*
+            //    for(int i = 0; i < grafik.Series.Count; i++)
+            //    {
+
+            //        grafik.Series[i].Points.Clear();
+
+            //    }
+            //    */
+
+            //    /*
+            //    //grafigi temizliyorum
+
+            /*
             foreach (var series in grafik.Series)
             {
                 series.Points.Clear();
-            }
+            }*/
 
 
 
-            //Grafiğe çizdirirken datalarımı bir objeye atıyorum
 
-            //eğer foodType boş ise bu demek oluyor ki GetReferans butonuna tıklandı ve referans verileri ekrana basılıyor
+            //    //Grafiğe çizdirirken datalarımı bir objeye atıyorum
+
+            //    //eğer foodType boş ise bu demek oluyor ki GetReferans butonuna tıklandı ve referans verileri ekrana basılıyor
             if (foodType.Equals(""))
             {
                 //foodType ını referansVerisi olarak giriyorum
                 foodType = "referansVerisi";
             }
 
-            //artık foodType'ın her türlü bir değere sahip
-            //foodType'ına göre foods araylistinden Food objesini getiriyorum eğer o foodType adında bir obje yok ise
-            //yeni bir Food objesi oluşturuyorum
+        //    //artık foodType'ın her türlü bir değere sahip
+        //    //foodType'ına göre foods araylistinden Food objesini getiriyorum eğer o foodType adında bir obje yok ise
+        //    //yeni bir Food objesi oluşturuyorum
             Food food = foundFood(foodType);
 
-
-            //grafiği ekrana çizdiriyorum
+        //    //grafiği ekrana çizdiriyorum
             for (int i = 0; i < 18; i++)
             {
                 //food objesinin datasına dataları ekliyorum
                 food.datalar.Add(float.Parse(cizilecekData[i]));
                 //grafiğe değeri çizdiriyorum
-                grafik.Series["D1"].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
-                                                                                    // döngü calıstıgı sürece dataları okuyup rastgele yerine yazmamız gerekiyor.
+               // grafik.Series["D1"].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
             }
+
+
 
 
         }
@@ -405,6 +439,12 @@ namespace GidaAnalizi
         private void disconnectBtn_Click(object sender, EventArgs e)
         {
 
+            baglantiyiKes();
+
+        }
+
+        private void baglantiyiKes()
+        {
             //objeyi kontrol ediyorum
             if (ComPort != null)
             {
@@ -413,11 +453,11 @@ namespace GidaAnalizi
                 connectBtn.Enabled = true;
 
                 //butonlarımı pasif hale getiriyorum
+                analyzeBtn.Enabled = false;
                 getRefBtn.Enabled = false;
                 disconnectBtn.Enabled = false;
                 dataSaveBtn.Enabled = false;
             }
-
         }
 
 
@@ -556,6 +596,12 @@ namespace GidaAnalizi
             //comboboxun textini resetliyorum
             foodTypeComboBox.Text = "";
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foodType = "halil";
+            ComPort.Write("s");
         }
     }
 }

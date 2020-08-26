@@ -134,7 +134,7 @@ namespace GidaAnalizi
                 string seriesName = $"{food.foodName} - {j+1}";
                 grafik.Series.Add(new Series(seriesName));
                 grafik.Series[seriesName].ChartType = SeriesChartType.Spline;
-                grafik.Series[seriesName].BorderWidth = 2;
+                grafik.Series[seriesName].BorderWidth = 1;
 
                 for (int i = 0; i < 18; i++)
                 {
@@ -159,38 +159,34 @@ namespace GidaAnalizi
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Food cizilecekFood = new Food(food.foodName);
 
-            float toplam = 0;
-            int kacTaneFoodVar = food.datalar.Count / 18;
+            int kacParca = food.datalar.Count / 18;
+            ArrayList ortalaması = new ArrayList();
+
             for (int i = 0; i < 18; i++)
             {
-
-                for(int j = 0; j < kacTaneFoodVar; j++)
+                float ort = 0;
+                for (int j = 0; j < kacParca; j++)
                 {
+                    ort += float.Parse(food.datalar[i + (18 * j)].ToString());
 
-                    toplam += float.Parse( food.datalar[i + (j * 18)].ToString() );
-                    
                 }
-
-                cizilecekFood.datalar.Add(toplam/kacTaneFoodVar);
+                ortalaması.Add(ort / kacParca);
 
             }
-
 
                 string seriesName = $"{food.foodName}";
                 grafik.Series.Add(new Series(seriesName));
                 grafik.Series[seriesName].ChartType = SeriesChartType.Spline;
-                grafik.Series[seriesName].BorderWidth = 5;
+                grafik.Series[seriesName].BorderWidth = 4;
                 grafik.Series[seriesName].Color = Color.White;
 
-            Console.WriteLine("s:" + cizilecekFood.datalar.Count);
-                for (int i = 0; i < cizilecekFood.datalar.Count; i++)
+                for (int i = 0; i < ortalaması.Count; i++)
                 {
-                    grafik.Series[seriesName].Points.AddXY(i, food.datalar[i]); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                    grafik.Series[seriesName].Points.AddXY(i, ortalaması[i]); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
                 }
 
-            ortalamasiBtn.Enabled = false;
+                ortalamasiBtn.Enabled = false;
 
 
         }

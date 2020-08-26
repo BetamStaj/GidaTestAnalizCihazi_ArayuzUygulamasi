@@ -16,7 +16,16 @@ namespace GidaAnalizi
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            try
+            {
+                Console.WriteLine("?");
+                Application.Run(new Form1());
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("HATA: "+e.Message);
+            }
         }
     }
 }

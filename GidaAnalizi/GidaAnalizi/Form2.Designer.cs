@@ -132,7 +132,7 @@
             this.ortalamasiBtn.Name = "ortalamasiBtn";
             this.ortalamasiBtn.Size = new System.Drawing.Size(105, 41);
             this.ortalamasiBtn.TabIndex = 35;
-            this.ortalamasiBtn.Text = "button1";
+            this.ortalamasiBtn.Text = "Ortalamasi";
             this.ortalamasiBtn.UseVisualStyleBackColor = true;
             this.ortalamasiBtn.Click += new System.EventHandler(this.button1_Click);
             // 
