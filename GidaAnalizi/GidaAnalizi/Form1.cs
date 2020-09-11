@@ -255,7 +255,7 @@ namespace GidaAnalizi
                 */
                 for(int i = 0; i < 18; i++)
                 {
-                    data += serialPort.ReadLine();
+                    data += serialPort.ReadLine() + "\n";
                 }
 
                 if (data.Contains("Pekspec"))
@@ -267,11 +267,13 @@ namespace GidaAnalizi
                 }
 
 
+                Console.WriteLine(data);
                 //datayi cizdirmek icin bir diziye atiyorum
                 string[] cizilecekData = data.Split('\r');
+                //string[] cizilecekData = data.Split('\n');
 
-                
-                for(int i = 0; i < cizilecekData.Length; i++)
+
+                for (int i = 0; i < cizilecekData.Length; i++)
                 {
 
                     cizilecekData[i] = cizilecekData[i].Replace("\n", "").Replace("\r", "");
@@ -351,6 +353,7 @@ namespace GidaAnalizi
 
 
 
+
             //    /*
             //    for(int i = 0; i < grafik.Series.Count; i++)
             //    {
@@ -368,6 +371,13 @@ namespace GidaAnalizi
             {
                 series.Points.Clear();
             }*/
+
+
+            floatDiziyeDonustur(cizilecekData);
+            Console.WriteLine("aralarindaki en buyuk data: " + enBuyuk);
+
+            grafik.ChartAreas[0].AxisY.Maximum = enBuyuk + 200;
+
             System.Threading.Thread.Sleep(50);
 
             // grafigiTemizle();
@@ -379,7 +389,12 @@ namespace GidaAnalizi
 
            System.Threading.Thread.Sleep(50);
 
-            
+
+
+
+            //chart.AxisY.Maximum = enBuyuk; // y ekseninin sınırları belirlendi.
+           
+
 
 
             //    //Grafiğe çizdirirken datalarımı bir objeye atıyorum
@@ -407,9 +422,32 @@ namespace GidaAnalizi
                  grafik.Series["D1"].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
             }
 
+            
 
 
+        }
 
+        float enBuyuk = 0;
+        public float[] floatDiziyeDonustur(String[] dizi)
+        {
+            float[] donusturulmusDizi = new float[dizi.Length];
+            enBuyuk = float.Parse(dizi[0]);
+            for(int i = 0; i < dizi.Length-1; i++)
+            {
+                Console.WriteLine(": " + dizi[i].ToString());
+                if (string.IsNullOrEmpty(dizi[i].ToString()))
+                {
+                    break;
+                }
+                donusturulmusDizi[i] = float.Parse(dizi[i].ToString());
+                if(enBuyuk < donusturulmusDizi[i])
+                {
+                    enBuyuk = donusturulmusDizi[i];
+                }
+            }
+
+
+            return donusturulmusDizi;
         }
 
 
@@ -557,6 +595,7 @@ namespace GidaAnalizi
                 //foodName ine göre bir arama yapıyorum
                 if (food.foodName.Equals(foodName))
                 {
+                    Food.enBuyukData = enBuyuk;
                     //açacağım 2. ekrana Food objemi gönderiyorum
                     Form2 f2 = new Form2(food);
                     f2.ShowDialog();

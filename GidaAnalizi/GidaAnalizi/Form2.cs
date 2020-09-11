@@ -47,7 +47,7 @@ namespace GidaAnalizi
             chart.AxisX.Minimum = 1;
             chart.AxisX.Maximum = 18; // x ekseninin sınırları belirlendi.
             chart.AxisY.Minimum = 0;
-            chart.AxisY.Maximum = 1000; // y ekseninin sınırları belirlendi.
+            chart.AxisY.Maximum = Food.enBuyukData + 200; // y ekseninin sınırları belirlendi.
             chart.AxisY.Interval = 100; // y ekseninin araligi belirlendi.
 
 

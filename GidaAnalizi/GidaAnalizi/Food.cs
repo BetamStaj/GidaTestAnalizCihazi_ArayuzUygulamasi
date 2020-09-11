@@ -12,7 +12,7 @@ namespace GidaAnalizi
 
         public string foodName;
         public ArrayList datalar;
-
+        public static float enBuyukData;
         public Food(string foodName)
         {
             this.foodName = foodName;
