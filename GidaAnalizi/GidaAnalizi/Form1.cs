@@ -351,7 +351,23 @@ namespace GidaAnalizi
         public void grafigeCiz(String[] cizilecekData)
         {
 
+            Console.WriteLine("foodType: " + foodType);
 
+            if (string.IsNullOrEmpty(foodType))
+            {
+                foodType = "Referans Verisi";
+            }
+            grafik.Series.Clear();
+
+            string seriesName = $"{foodType}";
+            Console.WriteLine("grafik.Series.IsUniqueName(foodType): " + grafik.Series.IsUniqueName(foodType));
+            if (grafik.Series.IsUniqueName(foodType))
+            {
+                grafik.Series.Add(new Series(seriesName));
+            }
+            grafik.Series[seriesName].ChartType = SeriesChartType.Spline;
+            grafik.Series[seriesName].BorderWidth = 1;
+            grafik.Series[seriesName].Color = Color.Red;
 
 
             //    /*
@@ -376,7 +392,20 @@ namespace GidaAnalizi
             floatDiziyeDonustur(cizilecekData);
             Console.WriteLine("aralarindaki en buyuk data: " + enBuyuk);
 
-            grafik.ChartAreas[0].AxisY.Maximum = enBuyuk + 200;
+            int aralik = (int)enBuyuk / 10;
+            Console.WriteLine("yuvarlanmis hali: " + aralik);
+
+            while (aralik%10 != 0)
+            {
+                aralik += 1;
+            }
+
+            Console.WriteLine("yuvarlanmis hali: " + aralik);
+            grafik.ChartAreas[0].AxisY.Interval = aralik;
+
+            grafik.ChartAreas[0].AxisY.Maximum = enBuyuk + aralik;
+
+
 
             System.Threading.Thread.Sleep(50);
 
@@ -419,7 +448,7 @@ namespace GidaAnalizi
                 //grafiğe değeri çizdiriyorum
                 //grafik.Series[sayac+""].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
 
-                 grafik.Series["D1"].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
+                 grafik.Series[foodType].Points.AddXY(i, float.Parse(cizilecekData[i])); // i değeri X eksenini, rastgele değeri ise Y eksenini gösterir.
             }
 
             
